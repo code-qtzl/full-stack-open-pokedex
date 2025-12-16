@@ -1,5 +1,15 @@
 {
-	"editor.tabSize": 2,
-	"editor.insertSpaces": true,
-	"editor.detectIndentation": false
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.detectIndentation": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "eslint.validate": ["javascript", "javascriptreact"],
+  "javascript.format.semicolons": "remove",
+  "prettier.useTabs": false,
+  "vetur.format.options.useTabs": false,
+  "typescript.format.semicolons": "remove",
+  "prettier.semi": false,
+  "prettier.tabWidth": 2
 }
