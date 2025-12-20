@@ -33,6 +33,28 @@ jobs:
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && !contains(github.event.head_commit.message, '#skip') }}
         run: echo "Deploying application..."
 
+      - name: Notify deployment success
+        if: ${{ success() && github.event_name == 'push' && !contains(join(github.event.commits.*.message, ' '), '#skip') }}
+        uses: rjstone/discord-webhook-notify@v2
+        with:
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+          severity: info
+          text: A new version of Pokedex deployed
+          description: to https://pokedex-full-stack-az-dark-leaf-244.fly.dev/ by ${{ github.event.head_commit.author.name }}
+
+      - name: The job has succeeded
+        if: ${{ success() }}
+        run: echo "The deployment pipeline completed successfully."
+
+      - name: Notify build failure
+        if: ${{ failure() }}
+        uses: rjstone/discord-webhook-notify@v2
+        with:
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+          severity: error
+          text: Build failed
+          description: "Commit: ${{ github.event.head_commit.url }}\nAuthor: ${{ github.event.head_commit.author.name }}\nMessage: ${{ github.event.head_commit.message }}"
+
   tag_release:
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-latest
