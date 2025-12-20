@@ -1,9 +1,9 @@
-# fly.toml app configuration file generated for pokedex-full-stack on 2025-12-16T16:14:31-06:00
+# fly.toml app configuration file generated for pokedex-full-stack-az-dark-leaf-244 on 2025-12-20T15:00:36-06:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'pokedex-full-stack-az'
+app = 'pokedex-full-stack-az-dark-leaf-244'
 primary_region = 'dfw'
 
 [build]
@@ -17,11 +17,11 @@ primary_region = 'dfw'
   processes = ['app']
 
   [[http_service.checks]]
-    grace_period = "10s"
-    interval = "30s"
-    method = "GET"
-    timeout = "5s"
-    path = "/"
+    interval = '30s'
+    timeout = '5s'
+    grace_period = '10s'
+    method = 'GET'
+    path = '/'
 
 [[vm]]
   memory = '1gb'
