@@ -1,0 +1,18 @@
+name: Health Check
+
+on:
+  push:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 3 * * *' # once per day
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check deployed app health
+        uses: jtalk/url-health-check-action@v4
+        with:
+          url: https://pokedex-full-stack-az-dark-leaf-244.fly.dev/
+          max-attempts: 3
+          retry-delay: 5s
